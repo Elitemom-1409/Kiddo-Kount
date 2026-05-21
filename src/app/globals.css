@@ -1,0 +1,252 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ================================================
+   KIDDO KOUNT — Cosmic Playground Global Styles
+   ================================================ */
+
+:root {
+  /* Cosmic palette */
+  --cosmic-deep: #0d0a2e;
+  --cosmic-indigo: #1a1147;
+  --nebula-violet: #5b2c9e;
+  --nebula-purple: #3d1a7e;
+  --star-cyan: #4cc9f0;
+  --cherry-pop: #ff4d6d;
+  --sunshine: #ffd60a;
+  --leaf: #06d6a0;
+  --bubblegum: #ff70a6;
+  --cloud-white: #fefae0;
+  --soft-cream: #fff8e7;
+
+  /* Glassmorphism */
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-bg-hover: rgba(255, 255, 255, 0.14);
+  --glass-border: rgba(255, 255, 255, 0.18);
+  --glass-border-hover: rgba(255, 255, 255, 0.3);
+  --glass-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+  --glass-shadow-hover: 0 12px 48px rgba(31, 38, 135, 0.35);
+}
+
+/* ---- Base resets ---- */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--cosmic-deep);
+  color: var(--cloud-white);
+  font-family: var(--font-nunito), 'Nunito', sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---- Scrollbar styling ---- */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--cosmic-deep);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--nebula-violet);
+  border-radius: 100px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--star-cyan);
+}
+
+/* ---- Selection ---- */
+::selection {
+  background: var(--star-cyan);
+  color: var(--cosmic-deep);
+}
+
+/* ================================================
+   GLASSMORPHISM UTILITIES
+   ================================================ */
+@layer components {
+  .glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    border-radius: 1.5rem;
+    box-shadow: var(--glass-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .glass-card:hover {
+    background: var(--glass-bg-hover);
+    border-color: var(--glass-border-hover);
+    box-shadow: var(--glass-shadow-hover), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    transform: translateY(-4px);
+  }
+
+  .glass-card-static {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    border-radius: 1.5rem;
+    box-shadow: var(--glass-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  /* Candy text (each letter a different color) */
+  .candy-text {
+    background: linear-gradient(90deg, #ff4d6d, #ffd60a, #06d6a0, #4cc9f0, #ff70a6, #ff4d6d);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Cosmic background base */
+  .cosmic-bg {
+    background: linear-gradient(135deg, var(--cosmic-deep) 0%, var(--cosmic-indigo) 30%, var(--nebula-violet) 60%, var(--nebula-purple) 100%);
+  }
+
+  /* Button styles */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 2rem;
+    background: linear-gradient(135deg, var(--cherry-pop) 0%, var(--bubblegum) 100%);
+    color: white;
+    font-family: var(--font-fredoka), 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 1.125rem;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(255, 77, 109, 0.4);
+    text-decoration: none;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 8px 30px rgba(255, 77, 109, 0.5);
+  }
+
+  .btn-primary:active {
+    transform: translateY(0) scale(0.98);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 2rem;
+    background: linear-gradient(135deg, var(--star-cyan) 0%, var(--leaf) 100%);
+    color: var(--cosmic-deep);
+    font-family: var(--font-fredoka), 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 1.125rem;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(76, 201, 240, 0.3);
+    text-decoration: none;
+  }
+
+  .btn-secondary:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 8px 30px rgba(76, 201, 240, 0.5);
+  }
+
+  /* Section container */
+  .section-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* Glow dot utility */
+  .glow-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.6);
+  }
+}
+
+/* ================================================
+   STAR FIELD (CSS-based for performance)
+   ================================================ */
+.stars-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ================================================
+   Reduced Motion
+   ================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ================================================
+   COSMIC SECTION DIVIDERS
+   ================================================ */
+.section-divider {
+  height: 120px;
+  background: linear-gradient(180deg, transparent 0%, rgba(91, 44, 158, 0.15) 50%, transparent 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.section-divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(76, 201, 240, 0.3) 50%, transparent 100%);
+}
+
+/* ================================================
+   RESPONSIVE TYPOGRAPHY SCALE
+   ================================================ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-fredoka), 'Fredoka', sans-serif;
+  line-height: 1.2;
+}
+
+/* ---- Ad labels ---- */
+.ad-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.05);
+}
