@@ -3,6 +3,31 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import StarField from "@/components/StarField";
+import AnalyticsHub from "@/components/AnalyticsHub";
+import Chatbot from "@/components/Chatbot";
+import Script from "next/script";
+
+// Generate massive hreflang map for 190 countries/locales
+const locales = [
+  "af", "sq", "am", "ar", "hy", "az", "eu", "be", "bn", "bs", "bg", "ca", "ceb", "ny", "zh", "co", "hr", "cs", "da", "nl",
+  "en", "eo", "et", "tl", "fi", "fr", "fy", "gl", "ka", "de", "el", "gu", "ht", "ha", "haw", "iw", "hi", "hmn", "hu", "is",
+  "ig", "id", "ga", "it", "ja", "jw", "kn", "kk", "km", "rw", "ko", "ku", "ky", "lo", "la", "lv", "lt", "lb", "mk", "mg",
+  "ms", "ml", "mt", "mi", "mr", "mn", "my", "ne", "no", "or", "ps", "fa", "pl", "pt", "pa", "ro", "ru", "sm", "gd", "sr",
+  "st", "sn", "sd", "si", "sk", "sl", "so", "es", "su", "sw", "sv", "tg", "ta", "tt", "te", "th", "tr", "tk", "uk", "ur",
+  "ug", "uz", "vi", "cy", "xh", "yi", "yo", "zu", "en-US", "en-GB", "en-CA", "en-AU", "en-NZ", "en-IE", "en-ZA", "es-ES",
+  "es-MX", "es-AR", "es-CO", "es-CL", "es-PE", "fr-FR", "fr-CA", "fr-BE", "fr-CH", "de-DE", "de-AT", "de-CH", "pt-PT",
+  "pt-BR", "it-IT", "it-CH", "nl-NL", "nl-BE", "zh-CN", "zh-TW", "zh-HK", "ja-JP", "ko-KR", "ru-RU", "ar-SA", "ar-AE",
+  "ar-EG", "hi-IN", "bn-BD", "bn-IN", "ur-PK", "ur-IN", "pa-IN", "pa-PK", "ta-IN", "ta-LK", "te-IN", "ml-IN", "mr-IN",
+  "gu-IN", "kn-IN", "or-IN", "as-IN", "id-ID", "ms-MY", "ms-BN", "th-TH", "vi-VN", "tr-TR", "el-GR", "pl-PL", "cs-CZ",
+  "sk-SK", "hu-HU", "ro-RO", "bg-BG", "hr-HR", "sr-RS", "sl-SI", "uk-UA", "fi-FI", "sv-SE", "no-NO", "da-DK", "is-IS",
+  "et-EE", "lv-LV", "lt-LT", "mt-MT", "sq-AL", "mk-MK", "bs-BA", "sr-Latn", "sr-Cyrl", "uz-UZ", "kk-KZ", "ky-KG", "tg-TJ",
+  "tk-TM", "mn-MN", "hy-AM", "az-AZ", "ka-GE", "fa-IR", "ps-AF", "he-IL", "am-ET", "sw-KE", "sw-TZ", "yo-NG", "ig-NG", 
+  "ha-NG", "zu-ZA", "xh-ZA"
+];
+const languages: Record<string, string> = {};
+locales.forEach(loc => {
+  languages[loc] = `https://kiddokount.com/${loc}`;
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://kiddokount.com"),
@@ -57,43 +82,62 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: "https://kiddokount.com",
-    languages: {
-      "en": "https://kiddokount.com",
-      "es": "https://kiddokount.com/es",
-      "hi": "https://kiddokount.com/hi",
-      "zh": "https://kiddokount.com/zh",
-      "ar": "https://kiddokount.com/ar",
-      "pt": "https://kiddokount.com/pt",
-      "fr": "https://kiddokount.com/fr",
-      "de": "https://kiddokount.com/de",
-      "ja": "https://kiddokount.com/ja",
-      "ru": "https://kiddokount.com/ru",
-      "id": "https://kiddokount.com/id",
-      "bn": "https://kiddokount.com/bn",
-    },
+    languages,
   },
 };
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "Kiddo Kount",
-  alternateName: "Kiddo Kount Cartoon Channel",
-  url: "https://kiddokount.com",
-  logo: "https://kiddokount.com/logo.png",
-  description: "Educational platform teaching math and STEM to toddlers and preschoolers through interactive games and videos.",
-  sameAs: [
-    "https://youtube.com/@kiddokount",
-    "https://instagram.com/kiddokount",
-    "https://tiktok.com/@kiddokount",
-    "https://facebook.com/kiddokount",
-    "https://pinterest.com/kiddokount",
-  ],
-  contactPoint: {
-    "@type": "ContactPoint",
-    contactType: "customer support",
-    email: "hello@kiddokount.com",
-  },
+  "@graph": [
+    {
+      "@type": "EducationalOrganization",
+      "@id": "https://kiddokount.com/#organization",
+      name: "Kiddo Kount",
+      alternateName: "Kiddo Kount Cartoon Channel",
+      url: "https://kiddokount.com",
+      logo: "https://kiddokount.com/logo.png",
+      description: "Educational platform teaching math and STEM to toddlers and preschoolers through interactive games and videos.",
+      sameAs: [
+        "https://youtube.com/@kiddokount",
+        "https://instagram.com/kiddokount",
+        "https://tiktok.com/@kiddokount"
+      ],
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "customer support",
+        email: "hello@kiddokount.com",
+      }
+    },
+    {
+      "@type": "Course",
+      "name": "Toddler Math and STEM Logic",
+      "description": "Learn basic math, counting, and geometry for preschoolers.",
+      "provider": {
+        "@id": "https://kiddokount.com/#organization"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://kiddokount.com/#website",
+      url: "https://kiddokount.com",
+      name: "Kiddo Kount",
+      publisher: { "@id": "https://kiddokount.com/#organization" },
+      inLanguage: "en-US"
+    },
+    {
+      "@type": "FAQPage",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "What is Kiddo Kount?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Kiddo Kount is an educational platform featuring Ralph, teaching STEM and math to toddlers and preschoolers."
+          }
+        }
+      ]
+    }
+  ]
 };
 
 export default function RootLayout({
@@ -111,12 +155,20 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
       </head>
       <body className="min-h-screen">
         <StarField />
+        <AnalyticsHub />
         <Navbar />
         <main>{children}</main>
         <Footer />
+        <Chatbot />
       </body>
     </html>
   );

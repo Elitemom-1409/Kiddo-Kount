@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next';
+import { blogs } from '@/data/blogs';
 import { videos } from '@/data/videos';
 
 const locales = ['en', 'es', 'hi', 'zh', 'ar', 'pt', 'fr', 'de', 'ja', 'ru', 'id', 'bn'];
@@ -28,5 +29,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticEntries, ...videoEntries];
+  const blogEntries: MetadataRoute.Sitemap = blogs.map(blog => ({
+    url: `${baseUrl}/blog/${blog.slug}`,
+    lastModified: new Date(blog.date),
+    changeFrequency: 'weekly' as const,
+    priority: 0.9,
+  }));
+
+  return [...staticEntries, ...videoEntries, ...blogEntries];
 }
